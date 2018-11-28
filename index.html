@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+	<head>
+	    <!-- Required meta tags -->
+	    <meta charset="utf-8">
+	    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	    <!-- Bootstrap CSS -->
+	    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+	    <title>Fabric.js Playground</title>
+	</head>
+	<body>
+		<div class="container">
+			<h1 class="display-4">Fabric.js</h1>
+		</div>
+		<hr>
+		<div class="container" id="canvasContainer" style="padding: 0px;">
+			<canvas id="canvas" style="border:1px solid #000000;"></canvas>
+		</div>
+		<div class="container">
+			<div class="row">
+				<div class="input-group mb-3">
+				    <div class="custom-file">
+					    <input type="file" class="custom-file-input" id="uploadedImg" aria-describedby="inputGroupFileAddon01">
+					    <label class="custom-file-label" for="uploadedImg">Choose file</label>
+				    </div>
+				</div>
+			</div>
+			<button type="button" class="btn btn-primary" onclick="addText()">
+				Add Text
+			</button>
+			<input type="text" name="addText" id="addText">
+			<button type="button" class="btn btn-primary" onclick="addCircle()">
+				Add Circle
+			</button>
+			<button type="button" class="btn btn-primary" onclick="addSquare()">
+				Add Square
+			</button>
+			<button type="button" class="btn btn-primary" onclick="addTriangle()">
+				Add Triangle
+			</button>
+			<button type="button" class="btn btn-danger" onclick="removeSelected()">
+				Remove Selected
+			</button>
+			<button type="button" class="btn btn-success" onclick="test()">
+				Test
+			</button>
+		</div>
+	
+
+	    <!-- Optional JavaScript -->
+	    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+	    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+	    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+	    <!-- Farbic.js -->
+	    <script type="text/javascript" src="assets/js/fabric.js"></script>
+	    <script type="text/javascript">
+			
+			var canvas = new fabric.Canvas('canvas', {
+				selection:false,
+				backgroundColor: 'white'
+			});
+			
+			var width = document.getElementById('canvasContainer').offsetWidth
+
+			canvas.setHeight(500);
+			canvas.setWidth(width);
+			canvas.setOverlayImage('assets/images/ButtersStotch.png', canvas.renderAll.bind(canvas));
+			
+			document.getElementById('uploadedImg').onchange = function handleImage(e) {
+				var reader = new FileReader();
+			    reader.onload = function (event){
+				    var imgObj = new Image();
+				    imgObj.src = event.target.result;
+				    imgObj.onload = function () {
+				        var image = new fabric.Image(imgObj);
+				        image.set({
+				            angle: 0,
+				            padding: 10,
+				            cornersize:10,
+				        });
+				        var scale = canvas.width / image.width;
+				        image.scale(scale);
+				        canvas.centerObject(image);
+				        canvas.add(image);
+				        canvas.renderAll();
+				    }
+			    }
+			    reader.readAsDataURL(e.target.files[0]);
+			}
+
+			function addText(){
+				var content = document.getElementById("addText").value;
+				console.log('addText: ' + content);
+				var myText = new fabric.Text(content, {
+					left: 100,
+					top: 100
+				});
+
+				(content) ? canvas.add(myText).setActiveObject(myText).renderAll(): false;
+			}
+
+			function addCircle(){
+				console.log('addCircle');
+				var myCircle = new fabric.Circle({
+					radius: 250,
+					fill: 'red',
+					stroke: 'blue',
+					opacity: 0.2,
+				});
+
+				canvas.add(myCircle)
+					.bringToFront(myCircle)
+					.renderAll();
+			}
+
+			function addSquare(){
+				console.log('addSquare');
+				var myRect = new fabric.Rect({
+					width:100,
+					height: 100,
+					fill: 'black',
+					stroke: 'green'
+				});
+
+				canvas.add(myRect).setActiveObject(myRect).renderAll();
+			}
+
+			function addTriangle(){
+				console.log('addTriangle');
+				var myTriangle = new fabric.Triangle({
+					width: 150,
+					height: 150,
+				});
+
+				canvas.add(myTriangle).setActiveObject(myTriangle).renderAll();
+			}
+
+			function removeSelected(){
+				console.log('removeSelected');
+				var object = canvas.getActiveObject();
+				(object) ? canvas.remove(object): false;
+			}
+
+			function test(){
+				console.log('test: remove newest object');
+				var objects = canvas.getObjects();
+				(objects) ? canvas.remove(objects[objects.length-1]): false;
+			}
+
+		</script>
+	</body>
+</html>
