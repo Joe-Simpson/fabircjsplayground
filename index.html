@@ -11,44 +11,190 @@
 	    <title>Fabric.js Playground</title>
 	</head>
 	<body>
-		<div class="container">
-			<h1 class="display-4">Fabric.js</h1>
-		</div>
-		<hr>
-		<div class="container" id="canvasContainer" style="padding: 0px;">
-			<canvas id="canvas" style="border:1px solid #000000;"></canvas>
-		</div>
-		<div class="container">
+		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+		    <div class="container justify-content-center">
+		    	<a class="navbar-brand" href="#">
+		    		<h1 class="display-4">Fabric.js Playground</h1>
+		    	</a>
+		    </div>
+		</nav>
+		<div class="container-fluid">
 			<div class="row">
-				<div class="input-group mb-3">
-				    <div class="custom-file">
-					    <input type="file" class="custom-file-input" id="uploadedImg" aria-describedby="inputGroupFileAddon01">
-					    <label class="custom-file-label" for="uploadedImg">Choose file</label>
-				    </div>
+				<div class="col">
+					<div class="container" id="canvasContainer" style="padding: 0px;">
+						<canvas id="canvas" style="border:1px solid #000000;"></canvas>
+					</div>
+				</div>
+				<div class="col" style="overflow: auto; max-height: 500px;">
+					<ul class="list-group">
+					    <li class="list-group-item">
+					    	<div class="row">
+								<h4>Overlay image</h4>
+							</div>
+							<div class="row">
+								<div class="container">
+									<button type="button" class="btn btn-primary" onclick="addOverlay()">
+										Add Overlay
+									</button>
+									<button type="button" class="btn btn-primary" onclick="removeOverlay()">
+										Remove Overlay
+									</button>
+								</div>
+							</div>
+					    </li>
+					    <li class="list-group-item">
+					    	<div class="row">
+								<h4>Add image from file</h4>
+							</div>
+							<div class="row">
+								<div class="input-group mb-3">
+								    <div class="custom-file">
+									    <input type="file" class="custom-file-input" id="uploadedImg" aria-describedby="inputGroupFileAddon01">
+									    <label class="custom-file-label" for="uploadedImg">Choose file</label>
+								    </div>
+								</div>
+							</div>
+					    </li>
+					    <li class="list-group-item">
+					    	<div class="row">
+								<h4>Add shapes</h4>
+							</div>
+							<div class="row">
+								<div class="container">
+									<button type="button" class="btn btn-primary" onclick="addCircle()">
+										Add Circle
+									</button>
+									<button type="button" class="btn btn-primary" onclick="addSquare()">
+										Add Square
+									</button>
+									<button type="button" class="btn btn-primary" onclick="addTriangle()">
+										Add Triangle
+									</button>
+								</div>
+							</div>
+					    </li>
+					    <li class="list-group-item">
+					    	<div class="row">
+								<h4>Remove objects</h4>
+							</div>
+							<div class="row">
+								<div class="container">
+									<button type="button" class="btn btn-warning" onclick="removeSelected()">
+										Remove Selected
+									</button>
+									<button type="button" class="btn btn-warning" onclick="removeNewest()">
+										Remove Newest
+									</button>
+									<button type="button" class="btn btn-danger" onclick="clearCanvas()">
+										Clear Canvas
+									</button>
+								</div>
+							</div>
+					    </li>
+					    <li class="list-group-item">
+					    	<div class="row">
+								<h4>Add path</h4>
+							</div>
+							<div class="row">
+								<div class="container">
+									<button type="button" class="btn btn-primary" onclick="addPath()">
+										Add Path
+									</button>
+								</div>
+							</div>
+					    </li>
+					    <li class="list-group-item">
+					    	<div class="row">
+								<h4>Animation</h4>
+							</div>
+							<div class="row">
+								<div class="container">
+									<button type="button" class="btn btn-success" onclick="animateRotate()">
+										Animate Rotate
+									</button>
+									<button type="button" class="btn btn-success" onclick="animateMove()">
+										Animate Move
+									</button>
+								</div>
+							</div>
+					    </li>
+					    <li class="list-group-item">
+					    	<div class="row">
+								<h4>Gradient</h4>
+							</div>
+							<div class="row">
+								<div class="container">
+									<button type="button" class="btn btn-success" onclick="gradient()">
+										Change Gradient
+									</button>
+								</div>
+							</div>
+					    </li>
+					    <li class="list-group-item">
+					    	<div class="row">
+								<h4>Add text</h4>
+							</div>
+							<div class="row">
+								<div class="container">
+									<input type="text" name="addText" id="addText">
+									<button type="button" class="btn btn-primary" onclick="addText()">
+										Add Text
+									</button>
+									<button type="button" class="btn btn-primary" onclick="addBoldText()">
+										Add Bold Text
+									</button>
+									<button type="button" class="btn btn-primary" onclick="addTextBox()">
+										Add Text Box
+									</button>
+								</div>
+							</div>
+					    </li>
+					    <li class="list-group-item">
+					    	<div class="row">
+								<h4>Test Button</h4>
+							</div>
+							<div class="row">
+								<div class="container">
+									<button type="button" class="btn btn-success" onclick="test()">
+										This button does something..
+									</button>
+								</div>
+							</div>
+					    </li>
+					</ul>
 				</div>
 			</div>
-			<button type="button" class="btn btn-primary" onclick="addText()">
-				Add Text
-			</button>
-			<input type="text" name="addText" id="addText">
-			<button type="button" class="btn btn-primary" onclick="addCircle()">
-				Add Circle
-			</button>
-			<button type="button" class="btn btn-primary" onclick="addSquare()">
-				Add Square
-			</button>
-			<button type="button" class="btn btn-primary" onclick="addTriangle()">
-				Add Triangle
-			</button>
-			<button type="button" class="btn btn-danger" onclick="removeSelected()">
-				Remove Selected
-			</button>
-			<button type="button" class="btn btn-success" onclick="test()">
-				Test
-			</button>
 		</div>
-	
-
+		<hr>
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col">
+					<div class="container">
+						Postion-X: <span id="posx"></span>
+					</div>
+				</div>
+				<div class="col">
+					<div class="container">
+						Postion-Y: <span id="posy"></span>
+					</div>
+				</div>
+				<div class="col">
+					<div class="container">
+						Clicked Object: <span id="cobj"></span>
+					</div>
+				</div>
+				<div class="col">
+					<div class="container">
+						Object-X: <span id="objx"></span>
+					</div>
+				</div>
+				<div class="col">
+					<div class="container">
+						Object-Y: <span id="objy"></span>
+					</div>
+				</div>
+			</div>
+		</div>
 	    <!-- Optional JavaScript -->
 	    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 	    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -56,100 +202,6 @@
 	    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 	    <!-- Farbic.js -->
 	    <script type="text/javascript" src="assets/js/fabric.js"></script>
-	    <script type="text/javascript">
-			
-			var canvas = new fabric.Canvas('canvas', {
-				selection:false,
-				backgroundColor: 'white'
-			});
-			
-			var width = document.getElementById('canvasContainer').offsetWidth
-
-			canvas.setHeight(500);
-			canvas.setWidth(width);
-			canvas.setOverlayImage('assets/images/ButtersStotch.png', canvas.renderAll.bind(canvas));
-			
-			document.getElementById('uploadedImg').onchange = function handleImage(e) {
-				var reader = new FileReader();
-			    reader.onload = function (event){
-				    var imgObj = new Image();
-				    imgObj.src = event.target.result;
-				    imgObj.onload = function () {
-				        var image = new fabric.Image(imgObj);
-				        image.set({
-				            angle: 0,
-				            padding: 10,
-				            cornersize:10,
-				        });
-				        var scale = canvas.width / image.width;
-				        image.scale(scale);
-				        canvas.centerObject(image);
-				        canvas.add(image);
-				        canvas.renderAll();
-				    }
-			    }
-			    reader.readAsDataURL(e.target.files[0]);
-			}
-
-			function addText(){
-				var content = document.getElementById("addText").value;
-				console.log('addText: ' + content);
-				var myText = new fabric.Text(content, {
-					left: 100,
-					top: 100
-				});
-
-				(content) ? canvas.add(myText).setActiveObject(myText).renderAll(): false;
-			}
-
-			function addCircle(){
-				console.log('addCircle');
-				var myCircle = new fabric.Circle({
-					radius: 250,
-					fill: 'red',
-					stroke: 'blue',
-					opacity: 0.2,
-				});
-
-				canvas.add(myCircle)
-					.bringToFront(myCircle)
-					.renderAll();
-			}
-
-			function addSquare(){
-				console.log('addSquare');
-				var myRect = new fabric.Rect({
-					width:100,
-					height: 100,
-					fill: 'black',
-					stroke: 'green'
-				});
-
-				canvas.add(myRect).setActiveObject(myRect).renderAll();
-			}
-
-			function addTriangle(){
-				console.log('addTriangle');
-				var myTriangle = new fabric.Triangle({
-					width: 150,
-					height: 150,
-				});
-
-				canvas.add(myTriangle).setActiveObject(myTriangle).renderAll();
-			}
-
-			function removeSelected(){
-				console.log('removeSelected');
-				var object = canvas.getActiveObject();
-				(object) ? canvas.remove(object): false;
-			}
-
-			function test(){
-				console.log('test: remove newest object');
-				var objects = canvas.getObjects();
-				(objects) ? canvas.remove(objects[objects.length-1]): false;
-			}
-
-		</script>
+	    <script type="text/javascript" src="assets/js/index.js"></script>
 	</body>
 </html>
