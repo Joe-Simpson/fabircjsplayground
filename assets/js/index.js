@@ -1,14 +1,17 @@
+
+// Setup canvas
 var canvas = new fabric.Canvas('canvas', {
-	selection:false,
+	// selection:false,
 	backgroundColor: 'white'
 });
-
 var width = document.getElementById('canvasContainer').offsetWidth
-
 canvas.setHeight(500);
 canvas.setWidth(width);
+
+// Event listeners
 canvas.on('mouse:down', function(options) {
-    console.log(options.e.clientX, options.e.clientY);
+	$("#cx").empty().append(options.e.clientX);
+	$("#cy").empty().append(options.e.clientY);
     if (options.target) {
     	$("#cobj").empty().append(options.target.type);
     	$("#objx").empty().append(options.e.clientX);
@@ -17,13 +20,38 @@ canvas.on('mouse:down', function(options) {
     }
 });
 canvas.on('mouse:up', function(options) {
-  console.log(options.e.clientX, options.e.clientY);
+  console.log('mouse:up ', options.e.clientX, options.e.clientY);
+});
+canvas.on('after:render', function(options) {
+  console.log('after:render');
+});
+canvas.on('object:modified', function(options) {
+  console.log('object:modified');
+});
+canvas.on('object:selected', function(options) {
+  console.log('object:selected');
+});
+canvas.on('object:moving', function(options) {
+  console.log('object:moving');
+});
+canvas.on('object:scaling', function(options) {
+  console.log('object:scaling');
+});
+canvas.on('object:rotating', function(options) {
+  console.log('object:rotating');
+});
+canvas.on('object:added', function(options) {
+  console.log('object:added');
+});
+canvas.on('object:removed', function(options) {
+  console.log('object:removed');
 });
 canvas.on('mouse:move', function(options) {
 	$("#posx").empty().append(options.e.clientX);
 	$("#posy").empty().append(options.e.clientY);
 });
 
+// Canvas functions
 function addOverlay(){
 	canvas.setOverlayImage('assets/images/ButtersStotch.png', canvas.renderAll.bind(canvas));
 }
